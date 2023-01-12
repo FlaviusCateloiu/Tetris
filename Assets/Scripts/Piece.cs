@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Piece : MonoBehaviour
 {
+    private float secondsCounter = 0;
+
+    private float secondsToCount = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,10 +37,41 @@ public class Piece : MonoBehaviour
                 transform.position += new Vector3(1, 0, 0);
         }
         // Implement Move Right (key RightArrow)
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            // Modify position
+            transform.position += new Vector3(1, 0, 0);
+
+            // See if it's valid
+            if (IsValidBoard())
+                // It's valid. Update grid.
+                UpdateBoard();
+            else
+                // Its not valid. revert.
+                transform.position += new Vector3(-1, 0, 0);
+        }
 
         // Implement Rotate, rotates the piece 90 degrees (Key UpArrow)
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            transform.Rotate(0, 0, 90);
+            if (IsValidBoard())
+                UpdateBoard();
+            else
+                transform.Rotate(0, 0, 0);
+        }
 
         // Implement move Downwards and Fall (each second)
+        ;
+        if (Input.GetKeyDown(KeyCode.DownArrow) || (secondsCounter += Time.deltaTime) >= secondsToCount)
+        {
+            transform.position += new Vector3(0, -1, 0);
+            if (IsValidBoard())
+                UpdateBoard();
+            else
+                transform.position += new Vector3(0, 1, 0);
+            secondsCounter = 0;
+        }
     }
 
     // TODO: Updates the board with the current position of the piece. 

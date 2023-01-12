@@ -9,7 +9,7 @@ public class Board : MonoBehaviour
     public static GameObject[,] grid = new GameObject[w, h];
 
     // Rounds Vector2 so does not have decimal values
-    // Used to force Integer coordinates (without decimals) when moving pieces
+    // Used to force Integer coordinates (without decimals) when moving piecethiss
     public static Vector2 RoundVector2(Vector2 v)
     {
         return new Vector2(Mathf.Round(v.x),
@@ -20,7 +20,7 @@ public class Board : MonoBehaviour
     public static bool InsideBorder(Vector2 pos)
     {
         bool yes;
-        if ((pos.x >= 0 && pos.x < w) && (pos.y >= 0 && pos.y < h)
+        if ((pos.x >= 0 && pos.x < w) && (pos.y >= 0 && pos.y < h))
         {
             yes = true;
         } else
@@ -56,13 +56,24 @@ public class Board : MonoBehaviour
     // TODO: Decreases all rows above Y
     public static void DecreaseRowsAbove(int y)
     {
-        
+        for (int i = y; i < h; i++)
+        {
+            DecreaseRow(y);
+        }
     }
 
     // TODO: Return true if all cells in a row have a GameObject (are not null), false otherwise
     public static bool IsRowFull(int y)
     {
-        return true;
+        bool fullRow = true;
+        for (int i = 0; i < w && fullRow; i++)
+        {
+            if (grid[i, y] == null)
+            {
+                fullRow = false;
+            }
+        }
+        return fullRow;
     }
 
     // Deletes full rows

@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour
 {
     //Pieces
     public GameObject[] pieces;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +22,9 @@ public class Spawner : MonoBehaviour
     public void SpawnNext()
     {
         // Random Index
-        int i = Random.Range(0, pieces.Length);
+        int i = Random.Range(0, this.pieces.Length);
         
         // Spawn Group at current Position
-        Instantiate(pieces[i], transform.position, Quaternion.identity);
+        Instantiate(this.pieces[i], this.transform.position, Quaternion.identity);
     }
 }
