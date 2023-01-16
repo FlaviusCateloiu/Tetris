@@ -5,8 +5,6 @@ using UnityEngine;
 public class Piece : MonoBehaviour
 {
     private float secondsCounter = 0;
-
-    private float secondsToCount = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,19 +56,34 @@ public class Piece : MonoBehaviour
             if (IsValidBoard())
                 UpdateBoard();
             else
-                transform.Rotate(0, 0, 0);
+                transform.Rotate(0, 0, 90);
         }
 
         // Implement move Downwards and Fall (each second)
         ;
-        if (Input.GetKeyDown(KeyCode.DownArrow) || (secondsCounter += Time.deltaTime) >= secondsToCount)
-        {
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Time.time - secondsCounter >= 1) {
+            // Modify position
             transform.position += new Vector3(0, -1, 0);
-            if (IsValidBoard())
+
+            // See if valid
+            if (IsValidBoard()) {
+                // It's valid. Update grid.
                 UpdateBoard();
-            else
+            } else {
+                // It's not valid. revert.
                 transform.position += new Vector3(0, 1, 0);
-            secondsCounter = 0;
+
+                // Clear filled horizontal lines
+                Board.DeleteFullRows();
+
+                // Spawn next Group
+                FindObjectOfType<Spawner>().SpawnNext();
+
+                // Disable script
+                enabled = false;
+            }
+
+            secondsCounter = Time.time;
         }
     }
 
@@ -78,8 +91,16 @@ public class Piece : MonoBehaviour
     void UpdateBoard()
     {
         // First you have to loop over the Board and make current positions of the piece null.
-        
+        for (int y = 0; y < Board.h; ++y)
+        for (int x = 0; x < Board.w; ++x)
+            if (Board.grid[x, y] != null)
+                if (Board.grid[x, y].transform == transform)
+                    Board.grid[x, y] = null;
         // Then you have to loop over the blocks of the current piece and add them to the Board.
+        foreach (GameObject child in transform) {
+            Vector2 v = Board.RoundVector2(child.transform.position);
+            Board.grid[(int)v.x, (int)v.y] = child;
+        }     
     }
 
     // Returns if the current position of the piece makes the board valid or not
