@@ -30,7 +30,7 @@ public class Board : MonoBehaviour
     {
         for (int i = 0; i < w; i++)
         {
-            Destroy(grid[i, y].gameObject);
+            Destroy(grid[i, y]);
             grid[i, y] = null;
         }
     }
@@ -45,11 +45,11 @@ public class Board : MonoBehaviour
         {
             if (grid[i, y] != null) {
                 // Move one towards bottom
-                grid[i, y-1] = grid[i, y];
+                grid[i, y - 1] = grid[i, y];
                 grid[i, y] = null;
 
                 // Update Block position
-                grid[i, y-1].transform.position += new Vector3(0, -1, 0);
+                grid[i, y - 1].transform.position += new Vector3(0, -1, 0);
             }
         }
     }
@@ -59,7 +59,7 @@ public class Board : MonoBehaviour
     {
         for (int i = y; i < h; i++)
         {
-            DecreaseRow(y);
+            DecreaseRow(i);
         }
     }
 

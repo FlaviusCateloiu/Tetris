@@ -11,7 +11,6 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CreateAllPieces();
         SpawnNext();
     }
 
@@ -24,11 +23,12 @@ public class Spawner : MonoBehaviour
     public void SpawnNext()
     {
         // Random Index
-        int i = Random.Range(0, this.pieces.Length);
+        int i = Random.Range(0, this.piecesPrefab.Length);
         
         // Spawn Group at current Position
-        this.pieces[i].transform.position = this.transform.position;
-        this.pieces[i].SetActive(true);
+        // this.pieces[i].transform.position = this.transform.position;
+        // this.pieces[i].SetActive(true);
+        Instantiate(this.piecesPrefab[i], this.transform.position, Quaternion.identity);
     }
 
     public void CreateAllPieces()
