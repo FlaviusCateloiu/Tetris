@@ -12,6 +12,7 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         CreateAllPieces();
+        SpawnNext();
     }
 
     // Update is called once per frame
@@ -23,10 +24,11 @@ public class Spawner : MonoBehaviour
     public void SpawnNext()
     {
         // Random Index
-        int i = Random.Range(0, this.piecesPrefab.Length);
+        int i = Random.Range(0, this.pieces.Length);
         
         // Spawn Group at current Position
-        Instantiate(this.piecesPrefab[i], this.transform.position, Quaternion.identity);
+        this.pieces[i].transform.position = this.transform.position;
+        this.pieces[i].SetActive(true);
     }
 
     public void CreateAllPieces()
