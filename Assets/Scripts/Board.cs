@@ -49,7 +49,7 @@ public class Board : MonoBehaviour
                 grid[i, y] = null;
 
                 // Update Block position
-                grid[i, y].transform.position += new Vector3(0, -1, 0);
+                grid[i, y-1].transform.position += new Vector3(0, -1, 0);
             }
         }
     }

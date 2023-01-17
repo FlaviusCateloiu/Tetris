@@ -33,7 +33,7 @@ public class Piece : MonoBehaviour
             else
                 // Its not valid. revert.
                 transform.position += new Vector3(1, 0, 0);
-        }
+        } else
         // Implement Move Right (key RightArrow)
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
@@ -47,8 +47,7 @@ public class Piece : MonoBehaviour
             else
                 // Its not valid. revert.
                 transform.position += new Vector3(-1, 0, 0);
-        }
-
+        } else
         // Implement Rotate, rotates the piece 90 degrees (Key UpArrow)
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -57,10 +56,8 @@ public class Piece : MonoBehaviour
                 UpdateBoard();
             else
                 transform.Rotate(0, 0, 90);
-        }
-
+        }else
         // Implement move Downwards and Fall (each second)
-        ;
         if (Input.GetKeyDown(KeyCode.DownArrow) || Time.time - secondsCounter >= 1) {
             // Modify position
             transform.position += new Vector3(0, -1, 0);
@@ -94,12 +91,12 @@ public class Piece : MonoBehaviour
         for (int y = 0; y < Board.h; ++y)
         for (int x = 0; x < Board.w; ++x)
             if (Board.grid[x, y] != null)
-                if (Board.grid[x, y].transform == transform)
+                if (Board.grid[x, y].transform.parent == transform)
                     Board.grid[x, y] = null;
         // Then you have to loop over the blocks of the current piece and add them to the Board.
-        foreach (GameObject child in transform) {
-            Vector2 v = Board.RoundVector2(child.transform.position);
-            Board.grid[(int)v.x, (int)v.y] = child;
+        foreach (Transform child in transform) {
+            Vector2 v = Board.RoundVector2(child.position);
+            Board.grid[(int)v.x, (int)v.y] = child.gameObject;
         }     
     }
 
