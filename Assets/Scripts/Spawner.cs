@@ -7,10 +7,13 @@ public class Spawner : MonoBehaviour
     //Pieces
     public GameObject[] piecesPrefab;
     public GameObject[] pieces;
+    public GameObject block;
     
     // Start is called before the first frame update
     void Start()
     {
+        Board.FillCells(block);
+        CreateAllPieces();
         SpawnNext();
     }
 
@@ -26,9 +29,8 @@ public class Spawner : MonoBehaviour
         int i = Random.Range(0, this.piecesPrefab.Length);
         
         // Spawn Group at current Position
-        // this.pieces[i].transform.position = this.transform.position;
-        // this.pieces[i].SetActive(true);
-        Instantiate(this.piecesPrefab[i], this.transform.position, Quaternion.identity);
+        this.pieces[i].transform.position = this.transform.position;
+        this.pieces[i].SetActive(true);
     }
 
     public void CreateAllPieces()

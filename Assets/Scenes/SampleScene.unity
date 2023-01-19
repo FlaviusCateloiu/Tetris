@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 675b6d4756e53081c81574b63d8afa20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pieces:
+  piecesPrefab:
   - {fileID: 6411581258152547564, guid: e74b2c6f2f73e07709989fa45f17050a, type: 3}
   - {fileID: 6411581258152547564, guid: 560e956c79f56808eb3f399742909e5e, type: 3}
   - {fileID: 6411581258152547564, guid: d809df6c3cc8c76998dbeb0704acc4c5, type: 3}
@@ -175,6 +175,7 @@ MonoBehaviour:
   - {fileID: 6411581258152547564, guid: 6c2f0e4944ff6cf419114e35ab86522c, type: 3}
   - {fileID: 6411581258152547564, guid: 690e86aeffcf54a9ab17543b0607c962, type: 3}
   - {fileID: 6411581258152547564, guid: 0b8e32a58580098209684a68024a768c, type: 3}
+  pieces: []
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

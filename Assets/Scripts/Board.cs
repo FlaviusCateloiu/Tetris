@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Board : MonoBehaviour
@@ -30,8 +31,7 @@ public class Board : MonoBehaviour
     {
         for (int i = 0; i < w; i++)
         {
-            Destroy(grid[i, y]);
-            grid[i, y] = null;
+            grid[i, y].SetActive(false);
         }
     }
 
@@ -43,13 +43,9 @@ public class Board : MonoBehaviour
     {
         for (int i = 0; i < w; i++)
         {
-            if (grid[i, y] != null) {
-                // Move one towards bottom
-                grid[i, y - 1] = grid[i, y];
-                grid[i, y] = null;
-
-                // Update Block position
-                grid[i, y - 1].transform.position += new Vector3(0, -1, 0);
+            if (!grid[i, y].activeSelf)
+            {
+                grid[i, y].SetActive(grid[i, y - 1].activeSelf);
             }
         }
     }
@@ -67,7 +63,7 @@ public class Board : MonoBehaviour
     public static bool IsRowFull(int y)
     {
         for (int x = 0; x < w; ++x)
-            if (grid[x, y] == null)
+            if (grid[x, y].activeSelf)
                 return false;
         return true;
     }
@@ -86,4 +82,16 @@ public class Board : MonoBehaviour
         }
     }
 
+
+    public static void FillCells(GameObject block)
+    {
+        for (int i = 0; i < w; i++)
+        {
+            for (int j = 0; j < h; j++)
+            {
+                grid[i, j] = Instantiate(block, new Vector3(i, j, 0), Quaternion.identity);
+                grid[i, j].SetActive(false);
+            }
+        }
+    }
 }
