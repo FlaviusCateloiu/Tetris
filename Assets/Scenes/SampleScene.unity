@@ -176,6 +176,7 @@ MonoBehaviour:
   - {fileID: 6411581258152547564, guid: 690e86aeffcf54a9ab17543b0607c962, type: 3}
   - {fileID: 6411581258152547564, guid: 0b8e32a58580098209684a68024a768c, type: 3}
   pieces: []
+  block: {fileID: 2730478688859792970, guid: 98af9709a6866ed65be04dc3d01eb763, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
